@@ -2,7 +2,12 @@ package com.workshop
 
 object PersonTitle {
   // match on tuple of (gender, status)
-  def genderTitle(gender: Gender, status: Option[Status]): String = ???
+  def genderTitle(gender: Gender, status: Option[Status]): String = (gender, status) match {
+    case (Male, _) => "Mr"
+    case (Female, Some(Single)) => "Miss"
+    case (Female, Some(Married)) => "Mrs"
+    case (Female, None) => "Ms"
+  }
 }
 
 

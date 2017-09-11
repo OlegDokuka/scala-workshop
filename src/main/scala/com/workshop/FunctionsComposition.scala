@@ -25,8 +25,10 @@ object FunctionsComposition {
   val applyShipping: Double => Double = _ + 10
 
   // use .andThen to create the function as a combination of existing functions
-  val calculatePriceThenShipping: Double => Double = _ => ???
+  val calculatePriceThenShipping: Double => Double = applyTax.andThen(applyDiscount).andThen(applyShipping)
 
   // use .compose (opposite order of andThen). Note: Now we're using `def` for the function deceleration
-  def addShippingThenCalculatePrice(price: Double): Double = ???
+  def addShippingThenCalculatePrice(price: Double): Double =
+    applyDiscount.compose(applyTax).compose(applyShipping)(price)
+
 }
